@@ -15,7 +15,7 @@ Auth::routes();
 
 Route::get('/', 'PagesController@index')->name('page.index');
 
-Route::group(['prefix' => 'admin-news'], function()
+Route::group(['prefix' => 'admin-news', 'middleware' => 'auth'], function()
 {
 	Route::get('/', 'NewsController@newsIndex')->name('news.newsIndex');
 	Route::get('/add', 'NewsController@newsAdd')->name('news.newsAdd');
