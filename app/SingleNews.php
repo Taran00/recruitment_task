@@ -28,4 +28,10 @@ class SingleNews extends Model
     	$route = route('news.newsEdit', ['id' => $this->id]);
     	return $route;
     }
+
+    public function getDeleteLink()
+    {
+    	$route = route('news.newsDelete', ['id' => $this->id]);
+    	return $route;
+    }
 }

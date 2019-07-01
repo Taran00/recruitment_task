@@ -24,7 +24,7 @@
 	                <td>{{ $one_news->created_at }}</td>
 	                <td>
 	                <a href="{{ $one_news->getEditLink() }}" class="btn btn-sm btn-primary mb-2">Edit</a>
-	                <a href="#" class="btn btn-sm btn-danger mb-2">Delete</a>
+	                <a href="{{ $one_news->getDeleteLink() }}" onclick="return confirm('Are you sure you want to delete this news?')" class="btn btn-sm btn-danger mb-2">Delete</a>
 	                </td>
 	            </tr>
 	        @endforeach  

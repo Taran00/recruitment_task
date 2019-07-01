@@ -68,4 +68,19 @@ class NewsController extends Controller
 
     	return redirect(route('news.newsIndex'));
     }
+
+    public function newsDelete($id)
+    {
+    	$user = Auth::user();
+    	$news = SingleNews::where('user_id', $user->id)->where('id', $id)->first();
+
+    	if(empty($news))
+    	{
+    		return redirect(route('news.newsIndex'));
+    	}
+
+    	$news->delete();
+
+    	return redirect(route('news.newsIndex'));
+    }
 }
