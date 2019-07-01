@@ -6,30 +6,66 @@ use Illuminate\Http\Request;
 use Auth;
 use App\SingleNews;
 
+//requestes
+use App\Http\Requests\StoreNewNewsRequest;
+
+
 class NewsController extends Controller
 {
     public function newsIndex()
     {
-    	return "news index";
+    	$user = Auth::user();
+    	$user_news = SingleNews::where('user_id', $user->id)->get();
+    	
+    	return view('news.index')->with('user_news', $user_news);
     }
 
     public function newsAdd()
     {
-    	return "news add";
+    	return view('news.add');
     }
 
-    public function newsEdit()
+    public function newsEdit($id)
     {
-    	return "news add";
+    	$user = Auth::user();
+    	$single_user_news = SingleNews::where('user_id', $user->id)->where('id', $id)->first();
+
+    	if(empty($single_user_news))
+    	{
+    		return redirect('news.newsIndex');
+    	}
+
+    	return view('news.edit')->with('single_user_news', $single_user_news);
     }
 
-    public function newsStore(Request $request)
+    public function newsStore(StoreNewNewsRequest $request)
     {
-    	return "news add";
+    	$user = Auth::user();
+    	$news = new SingleNews;
+    	$news->name = $request->name;
+    	$news->description = $request->description;
+    	$news->is_active = $request->is_active;
+		$news->user_id = $user->id;
+		$news->save();
+    	//todo -> message in session
+    	return redirect(route('news.newsIndex'));
     }
 
-    public function newsUpdate(Request $request)
+    public function newsUpdate(StoreNewNewsRequest $request)
     {
-    	return "news update";
+    	$user = Auth::user();
+    	$news = SingleNews::where('user_id', $user->id)->where('id', $request->news_id)->first();
+
+    	if(empty($news))
+    	{
+    		return redirect(route('news.newsIndex'));
+    	}
+
+    	$news->name = $request->name;
+    	$news->description = $request->description;
+    	$news->is_active = $request->is_active;
+    	$news->save();
+
+    	return redirect(route('news.newsIndex'));
     }
 }

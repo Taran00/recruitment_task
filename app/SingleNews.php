@@ -12,4 +12,20 @@ class SingleNews extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function shortDescription()
+    {
+    	return mb_strimwidth($this->description, 0, 40, ' (...) ');
+    }
+
+    public function shortName()
+    {
+    	return mb_strimwidth($this->name, 0, 30, ' (...) ');
+    }
+
+    public function getEditLink()
+    {
+    	$route = route('news.newsEdit', ['id' => $this->id]);
+    	return $route;
+    }
 }
