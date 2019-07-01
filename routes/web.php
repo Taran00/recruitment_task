@@ -14,3 +14,12 @@
 Auth::routes();
 
 Route::get('/', 'PagesController@index')->name('page.index');
+
+Route::group(['prefix' => 'admin-news'], function()
+{
+	Route::get('/', 'NewsController@newsIndex')->name('news.newsIndex');
+	Route::get('/add', 'NewsController@newsAdd')->name('news.newsAdd');
+	Route::get('/edit/{id}', 'NewsController@newsEdit')->name('news.newsEdit');
+	Route::post('/news-store', 'NewsController@newsStore')->name('news.newsStore');
+	Route::post('/news-update', 'NewsController@newsUpdate')->name('news.newsUpdate');
+});

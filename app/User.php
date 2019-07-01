@@ -33,4 +33,9 @@ class User extends Authenticatable
      *
      * @var array
      */
+
+    public function single_news()
+    {
+        return $this->hasMany(SingleNews::class);
+    }
 }
