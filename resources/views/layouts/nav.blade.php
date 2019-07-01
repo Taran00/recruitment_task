@@ -32,6 +32,9 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('page.index') }}">
+                                        MAIN PAGE
+                                    </a>
                                     <a class="dropdown-item" href="{{ route('news.newsIndex') }}">
                                         YOUR NEWS
                                     </a>
