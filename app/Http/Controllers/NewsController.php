@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\SingleNews;
+use Session;
 
 //requestes
 use App\Http\Requests\StoreNewNewsRequest;
@@ -12,6 +13,12 @@ use App\Http\Requests\StoreNewNewsRequest;
 
 class NewsController extends Controller
 {
+    public function allNewsIndex()
+    {
+        $all_news = SingleNews::where('is_active', 1)->get();
+        return view('news.all_news_index')->with('all_news', $all_news);
+    }
+
     public function newsIndex()
     {
     	$user = Auth::user();
@@ -47,7 +54,8 @@ class NewsController extends Controller
     	$news->is_active = $request->is_active;
 		$news->user_id = $user->id;
 		$news->save();
-    	//todo -> message in session
+    	
+        Session::flash('successMsg', 'News added!!');
     	return redirect(route('news.newsIndex'));
     }
 
@@ -58,6 +66,7 @@ class NewsController extends Controller
 
     	if(empty($news))
     	{
+            Session::flash('dangerMsg', 'There is no news like this!!');
     		return redirect(route('news.newsIndex'));
     	}
 
@@ -66,6 +75,7 @@ class NewsController extends Controller
     	$news->is_active = $request->is_active;
     	$news->save();
 
+        Session::flash('successMsg', 'News updated!!');
     	return redirect(route('news.newsIndex'));
     }
 
@@ -76,11 +86,13 @@ class NewsController extends Controller
 
     	if(empty($news))
     	{
+            Session::flash('dangerMsg', 'There is no news like this!!');
     		return redirect(route('news.newsIndex'));
     	}
 
     	$news->delete();
 
+        Session::flash('successMsg', 'News deleted!!');
     	return redirect(route('news.newsIndex'));
     }
 }

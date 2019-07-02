@@ -21,6 +21,7 @@ Route::post('/register', 'Auth\RegisterController@register');
 
 Route::get('/', 'PagesController@index')->name('page.index');
 
+Route::get('/news', 'NewsController@allNewsIndex')->name('news.allNewsIndex');
 Route::group(['prefix' => 'admin-news', 'middleware' => 'auth'], function()
 {
 	Route::get('/', 'NewsController@newsIndex')->name('news.newsIndex');

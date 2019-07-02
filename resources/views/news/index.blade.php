@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('content')
 
-<h2>Your news</h2>
+<h2>Your news <a href="{{ route('news.newsAdd') }}" class="btn btn-success">Create news</a></h2>
 <div class="table table-striped">
     <table class="table">
         <thead>
