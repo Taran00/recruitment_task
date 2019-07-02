@@ -1,13 +1,23 @@
 @extends('layouts.master')
 @section('content')
-
-<h2>All clients</h2>
 <div>
+<h3>Add new csv file:</h3>
+<form method="POST" action="{{route('csv.storeNewCsv')}}" enctype="multipart/form-data" >
+    {{ csrf_field() }}
+    <input type="file" id="csv" name="csv" accept='.csv' required>
+    <input type="submit" name="submit">
+</form>
+
+@if ($errors->has('csv'))
+<div class="alert alert-danger alert-dismissible fade show">{{ $errors->first('csv') }}</div>
+@endif
+
 <h3>Avaible csv files to set to DB:</h3>
 @foreach($array_of_files as $key => $value)
 <p>{{ $value }} <a href="{{ route('csv.csvToDb', ['file_name' => $value]) }}"> STORE TO DB </a></p>
 @endforeach
 </div>
+<h2>All clients</h2>
 <div class="table table-striped">
     <table class="table">
         <thead>

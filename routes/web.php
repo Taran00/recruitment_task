@@ -38,5 +38,6 @@ Route::group(['prefix' => 'clients'], function()
 
 Route::group(['prefix' => 'csv'], function()
 {
-	Route::get('/csv-to-dv/{file_name}', 'CsvFilesController@csvToDb')->name('csv.csvToDb');
+	Route::get('/csv-to-db/{file_name}', 'CsvFilesController@csvToDb')->name('csv.csvToDb');
+	Route::post('/store-new-csv', 'CsvFilesController@storeNewCsv')->name('csv.storeNewCsv');
 });
