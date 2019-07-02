@@ -2,6 +2,7 @@
 @section('content')
 <div>
 <h3>Add new csv file:</h3>
+<p>(requirements of CSV FILE HEADER: id, first_name, last_name, email, country)</p>
 <form method="POST" action="{{route('csv.storeNewCsv')}}" enctype="multipart/form-data" >
     {{ csrf_field() }}
     <input type="file" id="csv" name="csv" accept='.csv' required>
@@ -17,12 +18,11 @@
 <p>{{ $value }} <a href="{{ route('csv.csvToDb', ['file_name' => $value]) }}"> STORE TO DB </a></p>
 @endforeach
 </div>
-<h2>All clients</h2>
+<h2>All clients <a href="#" class="btn btn-danger">TURNCATE CLIENTS TABLE</a></h2>
 <div class="table table-striped">
     <table class="table">
         <thead>
             <tr>
-                <th>Name</th>
                 <th>First name</th>
                 <th>Last name</th>
                 <th>Email</th>

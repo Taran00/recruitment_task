@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Client;
 use Storage;
+use Session;
 
 class ClientsController extends Controller
 {
@@ -15,5 +16,12 @@ class ClientsController extends Controller
    		$array_of_files = Storage::disk('public_csv')->files();
 
    		return view('clients.clients_index')->with('all_clients', $all_clients)->with('array_of_files', $array_of_files);
+   }
+
+   public function turncateDb()
+   {
+   		Client::truncate();
+         Session::flash('successMsg', 'Done!');
+   		return redirect(route('clients.clientsIndex'));
    }
 }
