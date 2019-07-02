@@ -18,7 +18,7 @@
 <p>{{ $value }} <a href="{{ route('csv.csvToDb', ['file_name' => $value]) }}"> STORE TO DB </a></p>
 @endforeach
 </div>
-<h2>All clients <a href="#" class="btn btn-danger">TURNCATE CLIENTS TABLE</a></h2>
+<h2>All clients <a href="{{ route('clients.turncateDb') }}" class="btn btn-danger" onclick="return confirm('Are you sure?');">TURNCATE CLIENTS TABLE</a></h2>
 <div class="table table-striped">
     <table class="table">
         <thead>
