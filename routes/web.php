@@ -35,3 +35,8 @@ Route::group(['prefix' => 'clients'], function()
 {
 	Route::get('/', 'ClientsController@clientsIndex')->name('clients.clientsIndex');
 });
+
+Route::group(['prefix' => 'csv'], function()
+{
+	Route::get('/csv-to-dv/{file_name}', 'CsvFilesController@csvToDb')->name('csv.csvToDb');
+});

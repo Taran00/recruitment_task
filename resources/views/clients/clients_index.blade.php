@@ -1,7 +1,13 @@
 @extends('layouts.master')
 @section('content')
 
-<h2>All news</h2>
+<h2>All clients</h2>
+<div>
+<h3>Avaible csv files to set to DB:</h3>
+@foreach($array_of_files as $key => $value)
+<p>{{ $value }} <a href="{{ route('csv.csvToDb', ['file_name' => $value]) }}"> STORE TO DB </a></p>
+@endforeach
+</div>
 <div class="table table-striped">
     <table class="table">
         <thead>
