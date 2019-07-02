@@ -23,6 +23,12 @@ class CsvFilesController extends Controller
 	        $newFull = $newName.'.'.$request->csv->getClientOriginalExtension();
 	        $file = $request->file('csv');
 	        $file->storeAs('/', $newFull,['disk' => 'public_csv']);
+
+	        Session::flash('successMsg', 'Done!');
+		}
+		else
+		{
+			Session::flash('dangerMsg', 'Ups... smth went wrong :(');
 		}
     	
     	return redirect(route('clients.clientsIndex'));

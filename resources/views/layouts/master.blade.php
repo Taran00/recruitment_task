@@ -25,6 +25,18 @@
 
     @include('layouts.nav')
 
+        @if(session()->has('dangerMsg'))
+        <div class="alert alert-danger animated faster fadeInDown">
+               {{ session()->get('dangerMsg') }}
+        </div>
+        @endif
+
+        @if(session()->has('successMsg'))
+        <div class="alert alert-success animated faster fadeInDown">
+               {{ session()->get('successMsg') }}
+        </div>
+        @endif
+
       <main class="py-4">
             @yield('content')
       </main>
