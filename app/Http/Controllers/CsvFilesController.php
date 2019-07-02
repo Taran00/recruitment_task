@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Session;
 
 //requests
 use App\Http\Requests\CsvUploadRequest;
@@ -16,6 +17,14 @@ class CsvFilesController extends Controller
 
     public function storeNewCsv(CsvUploadRequest $request)
     {
-    	dd($request->all());
+    	if($request->csv)
+		{
+			$newName = 'csv_'.date('m-d-Y_H-m-s');
+	        $newFull = $newName.'.'.$request->csv->getClientOriginalExtension();
+	        $file = $request->file('csv');
+	        $file->storeAs('/', $newFull,['disk' => 'public_csv']);
+		}
+    	
+    	return redirect(route('clients.clientsIndex'));
     }
 }
