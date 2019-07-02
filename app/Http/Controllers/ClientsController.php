@@ -18,6 +18,18 @@ class ClientsController extends Controller
    		return view('clients.clients_index')->with('all_clients', $all_clients)->with('array_of_files', $array_of_files);
    }
 
+   public function chartIndex()
+   {
+      $all_clients = Client::all();
+      if($all_clients->isEmpty())
+      {
+         Session::flash('dangerMsg', 'First create Client database!');
+         return redirect(route('clients.clientsIndex'));
+      }
+
+      return view('clients.clients_chart_index');
+   }
+
    public function turncateDb()
    {
    		Client::truncate();

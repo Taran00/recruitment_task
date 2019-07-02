@@ -34,6 +34,7 @@ Route::group(['prefix' => 'admin-news', 'middleware' => 'auth'], function()
 Route::group(['prefix' => 'clients'], function()
 {
 	Route::get('/', 'ClientsController@clientsIndex')->name('clients.clientsIndex');
+	Route::get('/simple-chart', 'ClientsController@chartIndex')->name('clients.chartIndex');
 	Route::get('/turncate-client-db', 'ClientsController@turncateDb')->name('clients.turncateDb');
 });
 
