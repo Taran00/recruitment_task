@@ -30,3 +30,8 @@ Route::group(['prefix' => 'admin-news', 'middleware' => 'auth'], function()
 	Route::post('/news-store', 'NewsController@newsStore')->name('news.newsStore');
 	Route::post('/news-update', 'NewsController@newsUpdate')->name('news.newsUpdate');
 });
+
+Route::group(['prefix' => 'clients'], function()
+{
+	Route::get('/', 'ClientsController@clientsIndex')->name('clients.clientsIndex');
+});
